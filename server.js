@@ -7,7 +7,7 @@ var server = new http.Server(handleRequest);
 function handleRequest(req, res) {
     switch (req.url) {
         case '/':
-        case 'index.html':
+        case '/index.html':
             fs.readFile('public/index.html', function(err, data) {
                 if (err) {
                     res.setHeader("Content-Type", "text/html");
@@ -15,7 +15,7 @@ function handleRequest(req, res) {
                 }
             });
             break;
-        case 'simple-chat.css':
+        case '/simple-chat.css':
             fs.readFile('public/simple-chat', function(err, data) {
                 if (err) {
                     res.setHeader("Content-Type", "text/css");
@@ -23,7 +23,7 @@ function handleRequest(req, res) {
                 }
             });
             break;
-        case 'simple-chat.js':
+        case '/simple-chat.js':
             fs.readFile('public/simple-chat.js', function(err, data) {
                 if (err) {
                     res.setHeader("Content-Type", "text/js");
