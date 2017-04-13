@@ -3,6 +3,11 @@ const PORT = 3000;
 var fs = require('fs');
 var http = require('http');
 var server = new http.Server(handleRequest);
+var io = require('socket.io')(server);
+
+io.on('connection', function(socket) {
+    console.log("Hark! A user!");
+});
 
 function handleRequest(req, res) {
     switch (req.url) {
