@@ -5,8 +5,26 @@ var http = require('http');
 var server = new http.Server(handleRequest);
 var io = require('socket.io')(server);
 
+var connected = 0;
+
 io.on('connection', function(socket) {
-    console.log("Hark! A user!");
+    var name = 'User ' + connected;
+    var color = 'gray';
+    connected++;
+
+    socket.on('message', function(text) {
+        io.emit('message', {
+            user: name,
+            text: text,
+            color: color
+        });
+    });
+
+    socket.on('color', function(newColor) {
+        color = newColor;
+    });
+
+    socket.emit('welcome', "Welcome, " + name + "!");
 });
 
 function handleRequest(req, res) {
